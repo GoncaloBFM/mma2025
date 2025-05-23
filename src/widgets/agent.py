@@ -18,6 +18,7 @@ def draw_agent(data_selected=None):
         reverse=True
     )[:10]))
     characteristics_stack = dbc.Stack(list(map(lambda characteristic: html.P(characteristic), ['TOP CHARACTERISTICS']+top_characteristics)), direction="vertical")
+    
     content = dbc.Stack([characteristics_stack, html.Img(src='https://picsum.photos/200/300')], direction="horizontal", className='agent-container')
 
     return content

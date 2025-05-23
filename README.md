@@ -1,4 +1,3 @@
-## Running without Docker
 ### Setup
 ```
 git clone https://github.com/GoncaloBFM/mma2025

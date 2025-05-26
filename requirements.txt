@@ -11,3 +11,11 @@ umap-learn
 scikit-learn
 wget
 dash-holoniq-wordcloud
+openai
+torch
+torchvision
+diffusers
+transformers
+accelerate
+pillow
+safetensors

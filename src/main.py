@@ -3,6 +3,7 @@ from src import config
 from src.Dataset import Dataset
 from src.widgets import projection_radio_buttons, gallery, scatterplot, wordcloud, graph, heatmap, histogram, help_popup, agent
 from src.widgets.table import create_table
+from src.widgets import generated_image
 import dash_bootstrap_components as dbc
 
 import callbacks.table
@@ -16,13 +17,13 @@ import callbacks.deselect_button
 import callbacks.help_button
 import callbacks.graph
 
-from src.widgets import generated_image
-import callbacks.generated_image
 
+import callbacks.generated_image
+import callbacks.generated_image
 def run_ui():
     external_stylesheets = [dbc.themes.BOOTSTRAP]
     app = Dash(__name__, external_stylesheets=external_stylesheets)
-    callbacks.generated_image.register(app)
+    
 
     #app = Dash(__name__, external_stylesheets=external_stylesheets, suppress_callback_exceptions=True)
 

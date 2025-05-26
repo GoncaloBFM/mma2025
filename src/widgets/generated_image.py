@@ -2,7 +2,8 @@ from dash import html, dcc
 import dash_bootstrap_components as dbc
 from src.Dataset import Dataset
 from src.utils import generate_image_from_prompt  # ← local version 
-
+from src.Dataset import Dataset
+import pandas as pd
 
 
 
@@ -95,9 +96,7 @@ def draw_generated_image(data_selected=None):
     return layout
 
 
-from src.Dataset import Dataset
 
-import pandas as pd
 
 def build_prompt_from_data(selected_data):
     # Safety check

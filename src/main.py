@@ -3,6 +3,7 @@ from src import config
 from src.Dataset import Dataset
 from src.widgets import projection_radio_buttons, gallery, scatterplot, wordcloud, graph, heatmap, histogram, help_popup, agent
 from src.widgets.table import create_table
+from src.widgets import generated_image
 import dash_bootstrap_components as dbc
 
 import callbacks.table
@@ -16,9 +17,16 @@ import callbacks.deselect_button
 import callbacks.help_button
 import callbacks.graph
 
+
+import callbacks.generated_image
+import callbacks.generated_image
 def run_ui():
     external_stylesheets = [dbc.themes.BOOTSTRAP]
     app = Dash(__name__, external_stylesheets=external_stylesheets)
+    
+
+    #app = Dash(__name__, external_stylesheets=external_stylesheets, suppress_callback_exceptions=True)
+
 
     help_popup_widget = help_popup.create_help_popup()
     projection_radio_buttons_widget = projection_radio_buttons.create_projection_radio_buttons()
@@ -30,6 +38,8 @@ def run_ui():
     heatmap_widget = heatmap.create_heatmap()
     histogram_widget = histogram.create_histogram()
     agent_widget = agent.create_agent()
+    generated_image_widget = generated_image.create_generated_image_widget()
+
 
     right_tab = dcc.Tabs([
         dcc.Tab(label='wordcloud', children=wordcloud_widget),
@@ -37,7 +47,14 @@ def run_ui():
         dcc.Tab(label='histogram', children=histogram_widget),
         dcc.Tab(label='graph', children=graph_widget),
         dcc.Tab(label='heatmap', children=heatmap_widget),
-        dcc.Tab(label='agent', children=agent_widget)
+        dcc.Tab(label='agent', children=agent_widget),
+        dcc.Tab(label='Generate Image', children=generated_image_widget)
+  
+        
+        
+
+
+
     ])
 
     app.layout = dbc.Container([
@@ -56,7 +73,8 @@ def run_ui():
         ], className='bottom-row')
     ], fluid=True, id='container')
 
-    app.run(debug=True, use_reloader=False)
+    app.run(debug=True, use_reloader=True)
+    
 
 
 def main():

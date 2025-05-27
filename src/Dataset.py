@@ -5,7 +5,6 @@ import pandas
 from src import config, feature_engineering
 from src.dataloaders import cub_loader
 
-
 class Dataset:
     data = None
     count = None
@@ -38,9 +37,3 @@ class Dataset:
         cub_loader.load()
         feature_engineering.generate_projection_data()
         cub_loader.cleanup()
-
-    @staticmethod
-    def get_by_id(image_id):
-        if Dataset.data is None:
-            raise Exception("Dataset not loaded")
-        return Dataset.data.loc[image_id].to_dict()

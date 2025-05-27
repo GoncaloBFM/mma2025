@@ -3,7 +3,6 @@
     border: 1px solid #babfc7;
 }
 
-
 #header {
     font-family: sans-serif;
     font-weight: bold;
@@ -26,9 +25,7 @@
 }
 
 .radio-buttons{
-    font-family: sans-serif;
-    font-weight: bold;
-    font-size: 20px;
+    font-size: 17px;
     display: inline;
 }
 
@@ -71,16 +68,32 @@
 }
 
 .agent-container {
-    margin-left: 30px;
-    margin-right: 30px;
-    margin-top: 30px;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 30px;
+    overflow: scroll;
+}
+#generate-image-button{
+    margin-top: 10px;
+    margin-bottom: 50px;
 }
 
-.gen-container {
-    margin-left: 60px;
-    margin-right: 60px;
-    margin-top: 60px;
-  }
+.generated-image-container{
+    display: flex;
+    justify-content: center;
+}
+
+#prompt {
+    min-height: 100px;
+    height: 100px;
+}
+
+#characteristics-description{
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    margin-right: 10px;
+}
 
 #heatmap {
     position: relative; 

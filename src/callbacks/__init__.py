@@ -1,1 +1,0 @@
-import callbacks.generated_image

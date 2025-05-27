@@ -1,9 +1,9 @@
 from dash import Dash, html, dcc
 from src import config
 from src.Dataset import Dataset
-from src.widgets import projection_radio_buttons, gallery, scatterplot, wordcloud, graph, heatmap, histogram, help_popup, agent
+from src.widgets import projection_radio_buttons, gallery, scatterplot, wordcloud, graph, heatmap, histogram, help_popup
 from src.widgets.table import create_table
-from src.widgets import generated_image
+from src.widgets import agent
 import dash_bootstrap_components as dbc
 
 import callbacks.table
@@ -16,18 +16,12 @@ import callbacks.gallery
 import callbacks.deselect_button
 import callbacks.help_button
 import callbacks.graph
+import callbacks.agent
 
-
-import callbacks.generated_image
-import callbacks.generated_image
 def run_ui():
     external_stylesheets = [dbc.themes.BOOTSTRAP]
     app = Dash(__name__, external_stylesheets=external_stylesheets)
     
-
-    #app = Dash(__name__, external_stylesheets=external_stylesheets, suppress_callback_exceptions=True)
-
-
     help_popup_widget = help_popup.create_help_popup()
     projection_radio_buttons_widget = projection_radio_buttons.create_projection_radio_buttons()
     table_widget = create_table()
@@ -37,9 +31,7 @@ def run_ui():
     graph_widget = graph.create_graph()
     heatmap_widget = heatmap.create_heatmap()
     histogram_widget = histogram.create_histogram()
-    agent_widget = agent.create_agent()
-    generated_image_widget = generated_image.create_generated_image_widget()
-
+    agent_widget = agent.generate_agent_widget()
 
     right_tab = dcc.Tabs([
         dcc.Tab(label='wordcloud', children=wordcloud_widget),
@@ -48,13 +40,6 @@ def run_ui():
         dcc.Tab(label='graph', children=graph_widget),
         dcc.Tab(label='heatmap', children=heatmap_widget),
         dcc.Tab(label='agent', children=agent_widget),
-        dcc.Tab(label='Generate Image', children=generated_image_widget)
-  
-        
-        
-
-
-
     ])
 
     app.layout = dbc.Container([
@@ -73,7 +58,7 @@ def run_ui():
         ], className='bottom-row')
     ], fluid=True, id='container')
 
-    app.run(debug=True, use_reloader=True)
+    app.run(debug=True, use_reloader=False)
     
 
 

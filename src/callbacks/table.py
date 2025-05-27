@@ -3,7 +3,7 @@ import numpy
 from dash import Output, Input, callback, Patch, State
 from dash.exceptions import PreventUpdate
 
-from src import config, utils
+from src import config
 from src.Dataset import Dataset
 from src.widgets import graph, gallery, scatterplot, histogram, heatmap, wordcloud, agent
 
@@ -15,7 +15,9 @@ from src.widgets import graph, gallery, scatterplot, histogram, heatmap, wordclo
      Output("graph", "figure"), 
      Output('histogram', 'figure'),
      Output("heatmap", "figure"),
-     Output('agent', 'children'),
+     Output("prompt", "value"),
+     Output("characteristics-description", 'children'),
+     Output("generated-image", 'src')
      ],
     State('scatterplot', 'figure'),
     [Input("grid", "selectedRows"),
@@ -52,7 +54,8 @@ def table_row_is_selected(scatterplot_fig, selected_rows, added_rows):
         group_by_count['count_in_selection'] = wordcloud.wordcloud_weight_rescale(
             group_by_count['count_in_selection'],
             1,
-            Dataset.class_count().max())
+            Dataset.class_count().max()
+        )
         wordcloud_data = group_by_count[['class_name', 'count_in_selection']].values
         scatterplot.highlight_class_on_scatterplot(scatterplot_fig, None)
         graph_input = [{"class_name": class_name} for class_name in data_selected.sample(min(config.MAX_GRAPH_NODES, len(data_selected)))['class_name'].values]
@@ -64,6 +67,9 @@ def table_row_is_selected(scatterplot_fig, selected_rows, added_rows):
     histogram_fig = histogram.draw_histogram(selected_data=data_selected)
 
     heatmap_fig = heatmap.draw_heatmap(data_selected)
-    agent_fig = agent.draw_agent(data_selected)
 
-    return wordcloud_data, gallery_children, scatterplot_fig, graph_fig, histogram_fig, heatmap_fig, agent_fig
+    characteristic_pairs = agent.get_top_characteristics(data_selected)
+    characteristics_description = agent.build_characteristics_description(characteristic_pairs)
+    prompt = agent.build_prompt(characteristic_pairs)
+
+    return wordcloud_data, gallery_children, scatterplot_fig, graph_fig, histogram_fig, heatmap_fig, prompt, characteristics_description, ''

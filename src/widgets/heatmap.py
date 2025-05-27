@@ -1,3 +1,4 @@
+import os
 import plotly.express as px
 import plotly.graph_objects as go
 from dash import html, dcc
@@ -40,22 +41,25 @@ def draw_heatmap(data_selected):
 
         return fig
 
+    data_selected = data_selected.sort_values('image_path')  # sort by image_path
     attr_data = Dataset.get_attr_data().loc[data_selected.index]
     attr_data = attr_data.loc[:, attr_data.any()]  # filter attributes with all zeros
 
     image_path = data_selected['image_path'].to_list()
+    image_names = [os.path.splitext(os.path.basename(item))[0] for item in image_path]
+    max_len_name = max(len(name) for name in image_names)
 
     fig = px.imshow(attr_data.to_numpy().tolist(), 
                     x=attr_data.columns.tolist(), 
                     y=image_path,
-                    width=attr_data.shape[1]*20+200, height=attr_data.shape[0]*20+250+150
-                )
+                    width=attr_data.shape[1]*20+8*max_len_name+200, height=attr_data.shape[0]*20+250+150)
     
     fig.update_traces(dict(showscale=False, 
                            coloraxis=None, 
                            colorscale='blues'), 
                            hoverinfo='none', 
                            hovertemplate=None)
+
     fig.update_layout(
         xaxis=dict(
             side='top', 
@@ -64,10 +68,14 @@ def draw_heatmap(data_selected):
             fixedrange=True
         ),
         yaxis=dict(
-            visible=False, 
+            # visible=False, 
+            side='left',
             automargin=False, 
-            fixedrange=True
+            fixedrange=True, 
+            tickvals=list(range(len(image_names))),
+            ticktext=image_names,
         ), 
-        margin=dict(l=0, r=200, t=250, b=150))
+        margin=dict(l=8*max_len_name, r=200, t=250, b=150), 
+    )
     
     return fig

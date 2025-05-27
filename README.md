@@ -55,7 +55,7 @@ After the Dash server is running open http://127.0.0.1:8050/ on your browser.
 - Dash in 20 minutes: https://dash.plotly.com/tutorial
 - Plotly plots gallery: https://plotly.com/python/
 
-## Snellius tutorials:
+## Snellius tutorials
 - Basics: https://uvadlc-notebooks.readthedocs.io/en/latest/tutorial_notebooks/tutorial1/Lisa_Cluster.html
 - Resources: https://servicedesk.surf.nl/wiki/spaces/WIKI/pages/30660209/Snellius+partitions+and+accounting
 

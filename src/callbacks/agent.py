@@ -20,6 +20,7 @@ pipe = StableDiffusionPipeline.from_pretrained(
     Output('prompt', 'disabled'),
     State('prompt', 'value'),
     Input('generate-image-button', 'n_clicks'),
+    background=True,
     prevent_initial_call=True,
 )
 def generate_image_from_prompt(prompt, _):

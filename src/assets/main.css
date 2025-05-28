@@ -45,7 +45,8 @@
 }
 
 .wordcloud-container{
-    overflow: clip;
+    overflow: scroll;
+    padding: 30px;
     display: flex;
     justify-content: center;
     align-items: center;

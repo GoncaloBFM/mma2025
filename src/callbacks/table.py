@@ -36,13 +36,15 @@ def table_row_is_selected(scatterplot_fig, selected_rows, added_rows):
         selected_classes = set(map(lambda row: row['class_id'], selected_rows))
         data_selected = data_selected[data_selected['class_id'].isin(selected_classes)]
         scatterplot.highlight_class_on_scatterplot(scatterplot_fig, selected_classes)
-        wordcloud_data = [[row['class_name'], count] for row, count in zip(
+        count_in_section = numpy.array([row['count_in_selection'] for row in selected_rows])
+        wordcloud_data = sorted([[row['class_name'], count] for row, count in zip(
             selected_rows,
             wordcloud.wordcloud_weight_rescale(
-                numpy.array([row['count_in_selection'] for row in selected_rows]),
+                count_in_section,
                 1,
-                Dataset.class_count().max())
-        )]
+                count_in_section.max())
+        )], key=lambda x: x[1], reverse=True)
+        print(wordcloud_data)
         graph_fig = graph.draw_graph(selected_rows[:config.MAX_GRAPH_NODES], valid_birds=classes_in_scatterplot)
     else:
         group_by_count = (data_selected.groupby(['class_id', 'class_name'])['class_id']
@@ -55,7 +57,7 @@ def table_row_is_selected(scatterplot_fig, selected_rows, added_rows):
             1,
             Dataset.class_count().max()
         )
-        wordcloud_data = group_by_count[['class_name', 'count_in_selection']].values
+        wordcloud_data = group_by_count[['class_name', 'count_in_selection']].sort_values(by='count_in_selection', ascending=False).values
         scatterplot.highlight_class_on_scatterplot(scatterplot_fig, None)
         graph_input = [{"class_name": class_name} for class_name in data_selected.sample(min(config.MAX_GRAPH_NODES, len(data_selected)))['class_name'].values]
         graph_fig = graph.draw_graph(graph_input, drag_select=True)

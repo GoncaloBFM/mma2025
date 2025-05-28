@@ -8,5 +8,4 @@ from dash import Input, Output, callback, State
 def wordcloud_is_clicked(wordcloud_selection):
     print('Wordcloud is clicked')
     class_name = wordcloud_selection[0]
-    print(class_name)
     return {'function': f'params.data.class_name == "{class_name}"'}

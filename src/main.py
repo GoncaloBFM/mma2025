@@ -1,4 +1,5 @@
-from dash import Dash, html, dcc
+from dash import Dash, html, dcc, DiskcacheManager
+import diskcache
 from src import config
 from src.Dataset import Dataset
 from src.widgets import projection_radio_buttons, gallery, scatterplot, wordcloud, graph, heatmap, histogram, help_popup
@@ -20,7 +21,9 @@ import callbacks.agent
 
 def run_ui():
     external_stylesheets = [dbc.themes.BOOTSTRAP]
-    app = Dash(__name__, external_stylesheets=external_stylesheets)
+    cache = diskcache.Cache("./cache")
+    background_callback_manager = DiskcacheManager(cache)
+    app = Dash(__name__, external_stylesheets=external_stylesheets, background_callback_manager=background_callback_manager)
     
     help_popup_widget = help_popup.create_help_popup()
     projection_radio_buttons_widget = projection_radio_buttons.create_projection_radio_buttons()

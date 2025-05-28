@@ -7,4 +7,5 @@ from dash import Output, callback, Input
     prevent_initial_call=True,
 )
 def help_button_is_pressed(_):
+    print('Help button is pressed')
     return True

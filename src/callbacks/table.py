@@ -15,7 +15,6 @@ from src.widgets import graph, gallery, scatterplot, histogram, heatmap, wordclo
      Output("graph", "figure"), 
      Output('histogram', 'figure'),
      Output("heatmap", "figure"),
-     Output("prompt", "value"),
      Output("characteristics-description", 'children'),
      Output("generated-image", 'src')
      ],
@@ -68,8 +67,6 @@ def table_row_is_selected(scatterplot_fig, selected_rows, added_rows):
 
     heatmap_fig = heatmap.draw_heatmap(data_selected)
 
-    characteristic_pairs = agent.get_top_characteristics(data_selected)
-    characteristics_description = agent.build_characteristics_description(characteristic_pairs)
-    prompt = agent.build_prompt(characteristic_pairs)
+    characteristics_description = agent.get_top_characteristics(data_selected)
 
-    return wordcloud_data, gallery_children, scatterplot_fig, graph_fig, histogram_fig, heatmap_fig, prompt, characteristics_description, ''
+    return wordcloud_data, gallery_children, scatterplot_fig, graph_fig, histogram_fig, heatmap_fig, characteristics_description, ''

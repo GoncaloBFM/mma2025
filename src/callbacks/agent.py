@@ -1,11 +1,11 @@
 import threading
 from io import BytesIO
-from traceback import print_tb
 
 import torch
 from dash import Input, Output, callback, State
 from diffusers import StableDiffusionPipeline
-
+import torch.multiprocessing as mp
+mp.set_start_method('spawn')
 from src import config, utils
 
 lock = threading.Lock()

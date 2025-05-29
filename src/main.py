@@ -21,7 +21,7 @@ import callbacks.agent
 
 def run_ui():
     external_stylesheets = [dbc.themes.BOOTSTRAP]
-    cache = diskcache.Cache("./cache")
+    cache = diskcache.Cache("./.cache")
     background_callback_manager = DiskcacheManager(cache)
     app = Dash(__name__, external_stylesheets=external_stylesheets, background_callback_manager=background_callback_manager)
     

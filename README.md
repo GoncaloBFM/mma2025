@@ -48,7 +48,7 @@ python src/main.py
 
 ### Connect to server on your local machine
 ```
-> ssh -L 8050:127.0.0.1:8050 -J <user>@snellius.surf.nl <user>@<partition>
+ssh -L 8050:127.0.0.1:8050 -J <user>@snellius.surf.nl <user>@<partition>
 ```
 
 After the Dash server is running open http://127.0.0.1:8050/ on your browser.

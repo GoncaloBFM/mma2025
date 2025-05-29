@@ -1,7 +1,5 @@
 plotly==5.20.0
 dash==2.16.1
-diskcache
-dash[diskcache]
 git+https://github.com/openai/CLIP.git
 dash-bootstrap-components
 pandas

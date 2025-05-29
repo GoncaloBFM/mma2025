@@ -21,12 +21,16 @@ After the Dash server is running open http://127.0.0.1:8050/ on your browser.
 
 ## Snellius
 ### Connect to Snellius
+```
+ssh gmarcelino@snellius.surf.nl 
+```
+
 ### Setup project
 ```
 git clone https://github.com/GoncaloBFM/mma2025
 cd mma2025
 python -m venv .venv
-source .venv/bin/activate (for Windows run: .venv\Scripts\activate)
+source .venv/bin/activate 
 pip install -r requirements.txt
 ```
 
@@ -38,17 +42,16 @@ srun --partition=<partition name> --gpus=1 --ntasks=1 --cpus-per-task=1 --time=0
 ### Run server on Snellius
 On the root directory of the project run:
 ```
-export PYTHONPATH="$PYTHONPATH:$PWD" (for Windows run: set PYTHONPATH=%CD%)
+export PYTHONPATH="$PYTHONPATH:$PWD" 
 python src/main.py
 ```
 
 ### Connect to server on your local machine
 ```
-ssh -L 8050:<partition name>:8050 <user>@snellius.surf.nl
+> ssh -L 8050:127.0.0.1:8050 -J gmarcelino@snellius.surf.nl <user>@<partition>
 ```
 
 After the Dash server is running open http://127.0.0.1:8050/ on your browser.
-
 
 
 ## Plotly and Dash tutorials

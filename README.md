@@ -36,7 +36,7 @@ pip install -r requirements.txt
 
 ### Access compute node
 ```
-srun --partition=<partition name> --gpus=1 --ntasks=1 --cpus-per-task=1 --time=00:20:00 --pty bash -i (other parameters are possible see instructions on Snellius below)
+srun --partition=gpu_mig --gpus=1 --ntasks=1 --cpus-per-task=1 --time=00:20:00 --pty bash -i (other parameters are possible see instructions on Snellius below)
 ```
 
 ### Run server on Snellius
@@ -48,7 +48,7 @@ python src/main.py
 
 ### Connect to server on your local machine
 ```
-ssh -L 8050:127.0.0.1:8050 -J <user>@snellius.surf.nl <user>@<partition>
+ssh -L 8050:127.0.0.1:8050 -J <user>@snellius.surf.nl <user>@<node hostname>
 ```
 
 After the Dash server is running open http://127.0.0.1:8050/ on your browser.
